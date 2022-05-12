@@ -31,6 +31,8 @@
 		53BFDB752829CC0F00234203 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BFDB742829CC0F00234203 /* Artist.swift */; };
 		53BFDB772829CC2100234203 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BFDB762829CC2100234203 /* UserProfile.swift */; };
 		53BFDB7A2829E7B400234203 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BFDB792829E7B400234203 /* Extensions.swift */; };
+		53D01BEE282C786C0027F875 /* APIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D01BED282C786C0027F875 /* APIImage.swift */; };
+		53D01BF1282C80F90027F875 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D01BF0282C80F90027F875 /* SettingModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,8 @@
 		53BFDB742829CC0F00234203 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		53BFDB762829CC2100234203 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		53BFDB792829E7B400234203 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		53D01BED282C786C0027F875 /* APIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIImage.swift; sourceTree = "<group>"; };
+		53D01BF0282C80F90027F875 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		53D01BEF282C80E90027F875 /* OfflineModel */ = {
+			isa = PBXGroup;
+			children = (
+				53D01BF0282C80F90027F875 /* SettingModel.swift */,
+			);
+			path = OfflineModel;
+			sourceTree = "<group>";
+		};
 		53D212AE2829C7A900A39CF7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,10 +169,12 @@
 		53D212B02829C7B500A39CF7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				53D01BEF282C80E90027F875 /* OfflineModel */,
 				53BFDB702829CBE600234203 /* PlayList.swift */,
 				53BFDB722829CBF500234203 /* AudioTrack.swift */,
 				53BFDB742829CC0F00234203 /* Artist.swift */,
 				53BFDB762829CC2100234203 /* UserProfile.swift */,
+				53D01BED282C786C0027F875 /* APIImage.swift */,
 				538BBE1E282B2EF7003E0069 /* AuthResponse.swift */,
 			);
 			path = Models;
@@ -264,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53BFDB572829CAC200234203 /* SearchViewController.swift in Sources */,
+				53D01BEE282C786C0027F875 /* APIImage.swift in Sources */,
 				53BFDB6B2829CB8800234203 /* AuthManager.swift in Sources */,
 				53BFDB692829CB6700234203 /* SearchResultsViewController.swift in Sources */,
 				53BFDB5F2829CB1900234203 /* WelcomeViewController.swift in Sources */,
@@ -282,6 +297,7 @@
 				53BFDB752829CC0F00234203 /* Artist.swift in Sources */,
 				53BFDB672829CB5100234203 /* PlayListViewController.swift in Sources */,
 				53315CB62829C5DE006A58B1 /* SceneDelegate.swift in Sources */,
+				53D01BF1282C80F90027F875 /* SettingModel.swift in Sources */,
 				53BFDB652829CB4600234203 /* PlayerViewController.swift in Sources */,
 				53BFDB6D2829CBA300234203 /* APICaller.swift in Sources */,
 				53BFDB612829CB3000234203 /* SettingsViewController.swift in Sources */,
