@@ -27,6 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         window.makeKeyAndVisible()
+        window.overrideUserInterfaceStyle = .dark
         self.window = window
     }
 
