@@ -21,7 +21,7 @@ final class AuthManager {
         static let clientSecret = "9a4dd287c2c143658f861252aa0cb14f"
         static let tokenApiURL = "https://accounts.spotify.com/api/token"
         static let redirectURI = "https://github.com/Ahmed-Amin-Hassan-Ismail/Spotify"
-        static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read"
+        static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
     }
     
     public var signInURL: URL? {

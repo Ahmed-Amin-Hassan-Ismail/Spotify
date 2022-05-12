@@ -62,6 +62,7 @@ extension ProfileViewController {
         tableView.isHidden = false
         // configure tableview models
         models.append("Full Name: \(model.display_name)")
+        models.append("Email Address: \(model.email)")
         models.append("User ID: \(model.id)")
         models.append("Plan: \(model.product)")
         createTableHeaderImage(with: model.images.first?.url)
