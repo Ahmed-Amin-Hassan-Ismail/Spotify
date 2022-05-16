@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53171C612832EC32002F35BE /* NewReleasesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53171C602832EC32002F35BE /* NewReleasesCellViewModel.swift */; };
 		53315CB42829C5DE006A58B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53315CB32829C5DE006A58B1 /* AppDelegate.swift */; };
 		53315CB62829C5DE006A58B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53315CB52829C5DE006A58B1 /* SceneDelegate.swift */; };
 		53315CB82829C5DE006A58B1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53315CB72829C5DE006A58B1 /* HomeViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53171C602832EC32002F35BE /* NewReleasesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReleasesCellViewModel.swift; sourceTree = "<group>"; };
 		53315CB02829C5DE006A58B1 /* Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53315CB32829C5DE006A58B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53315CB52829C5DE006A58B1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,8 +122,8 @@
 				53D212B22829C7BE00A39CF7 /* Resources */,
 				53BFDB782829E7A700234203 /* Extensions */,
 				53D212B32829C7C600A39CF7 /* Managers */,
-				53D212B12829C7B900A39CF7 /* ViewModels */,
 				53D212B02829C7B500A39CF7 /* Models */,
+				53D212B12829C7B900A39CF7 /* ViewModels */,
 				53D212AF2829C7AF00A39CF7 /* Views */,
 				53D212AE2829C7A900A39CF7 /* Controllers */,
 				53315CC12829C5E0006A58B1 /* Info.plist */,
@@ -212,6 +214,7 @@
 		53D212B12829C7B900A39CF7 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				53171C602832EC32002F35BE /* NewReleasesCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				53BFDB572829CAC200234203 /* SearchViewController.swift in Sources */,
 				53D01BEE282C786C0027F875 /* APIImage.swift in Sources */,
 				53BFDB6B2829CB8800234203 /* AuthManager.swift in Sources */,
+				53171C612832EC32002F35BE /* NewReleasesCellViewModel.swift in Sources */,
 				53BFDB692829CB6700234203 /* SearchResultsViewController.swift in Sources */,
 				53BFDB5F2829CB1900234203 /* WelcomeViewController.swift in Sources */,
 				53D9C2F3282DBB3F0008DACA /* NewReleaseResponse.swift in Sources */,
