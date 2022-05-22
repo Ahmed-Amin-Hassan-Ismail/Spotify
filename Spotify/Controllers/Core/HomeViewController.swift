@@ -9,8 +9,8 @@ import UIKit
 
 enum BrowseSectionType {
     case newReleases(viewModel: [NewReleasesCellViewModel])
-    case featuredPlaylists(viewModel: [NewReleasesCellViewModel])
-    case recommendedTracks(viewModel: [NewReleasesCellViewModel])
+    case featuredPlaylists(viewModel: [FeaturedPlaylistCellViewModel])
+    case recommendedTracks(viewModel: [RecommendedTrackCellViewModel])
 }
 
 class HomeViewController: UIViewController {
@@ -124,7 +124,7 @@ extension HomeViewController {
             let verticalGroup = NSCollectionLayoutGroup.vertical(
                 layoutSize: verticalGroupLayoutSize,
                 subitem: item,
-                count: 3)
+                count: 2)
             
             let horizontalGroup = NSCollectionLayoutGroup.horizontal (
                 layoutSize: horizontalGroupLayoutSize,
@@ -215,9 +215,18 @@ extension HomeViewController {
                                             numberOfTracks: $0.total_tracks,
                                             artistName: $0.artists.first?.name ?? "-")
         })))
-        sections.append(.featuredPlaylists(viewModel: []))
         
-        sections.append(.recommendedTracks(viewModel: []))
+        sections.append(.featuredPlaylists(viewModel: playlists.compactMap({
+            return FeaturedPlaylistCellViewModel(name: $0.name,
+                                                 artworkURL: URL(string: $0.images.first?.url ?? ""),
+                                                 creatorName: $0.owner.display_name)
+        })))
+        
+        sections.append(.recommendedTracks(viewModel: tracks.compactMap({
+            return RecommendedTrackCellViewModel(name: $0.name,
+                                                 artistName: $0.artists.first?.name ?? "-",
+                                                 artworkURL: URL(string: $0.album?.images.first?.url ?? ""))
+        })))
         
         collectionView.reloadData()
     }
@@ -236,7 +245,7 @@ extension HomeViewController {
         var recommendations: RecommendationsResponse?
         
         // New Releases
-        APICaller.shared.getNewRelease { [weak self] result in
+        APICaller.shared.getNewRelease { result in
             defer {
                 group.leave()
             }
@@ -339,6 +348,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 for: indexPath) as? FeaturedPlaylistCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let viewModel = viewModel[indexPath.row]
+            cell.configure(with: viewModel)
             return cell
             
         case .recommendedTracks(viewModel: let viewModel):
