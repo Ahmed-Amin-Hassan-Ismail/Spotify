@@ -270,7 +270,7 @@ extension HomeViewController {
             }
         }
         
-        //Recommended Tracks
+        // Recommended Tracks
         APICaller.shared.getRecommendedGenres { result in
             switch result {
             case .success(let model):
@@ -281,23 +281,26 @@ extension HomeViewController {
                         seeds.insert(random)
                     }
                 }
-                
-                APICaller.shared.getRecommendations(genres: seeds) { request in
+
+                APICaller.shared.getRecommendations(genres: seeds) { recommendedResult in
                     defer {
                         group.leave()
                     }
-                    switch request {
+
+                    switch recommendedResult {
                     case .success(let model):
                         recommendations = model
+
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
                 }
-                
+
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
+        
         group.notify(queue: .main) { [weak self] in
             guard let newAlbums = newReleases?.albums.items,
                   let playlists = featuredPlaylist?.playlists.items,
@@ -358,6 +361,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 for: indexPath) as? RecommendedTrackCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let viewModel = viewModel[indexPath.row]
+            cell.configure(with: viewModel)
             return cell
         }
     }
