@@ -17,6 +17,9 @@ class HomeViewController: UIViewController {
     
     //MARK: - Variables
     private var sections = [BrowseSectionType]()
+    private var newAlbums = [Album]()
+    private var playlists = [Playlist]()
+    private var tracks = [AudioTrack]()
     
     //MARK: - Properties
     private lazy var collectionView = UICollectionView (
@@ -209,6 +212,10 @@ extension HomeViewController {
         playlists: [Playlist],
         tracks: [AudioTrack]
     ) {
+        self.newAlbums = newAlbums
+        self.playlists = playlists
+        self.tracks = tracks
+        
         sections.append(.newReleases(viewModel: newAlbums.compactMap({
             return NewReleasesCellViewModel(name: $0.name,
                                             artworkURL: URL(string: $0.images.first?.url ?? ""),
@@ -364,6 +371,26 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             let viewModel = viewModel[indexPath.row]
             cell.configure(with: viewModel)
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let section = sections[indexPath.section]
+        switch section {
+        case .newReleases:
+            let album = newAlbums[indexPath.row]
+            let vc = AlbumViewController(album: album)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        case .featuredPlaylists:
+            let playlist = playlists[indexPath.row]
+            let vc = PlaylistViewController(playlist: playlist)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        case .recommendedTracks:
+            break
         }
     }
 }
