@@ -1,5 +1,5 @@
 # Spority
-Music Streaming App 
+## Music Streaming App 
 
 1- Auth Manage for handling access and refresh token  -> Singleton Pattern
 
