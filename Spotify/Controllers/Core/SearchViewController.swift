@@ -9,6 +9,9 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    //MARK: - Variables
+    private var categories = [Category]()
+    
     //MARK: - Properties
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: SearchResultsViewController())
@@ -31,6 +34,7 @@ class SearchViewController: UIViewController {
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         self.setupUI()
+        self.fetchCategory()
         
     }
     
@@ -39,6 +43,23 @@ class SearchViewController: UIViewController {
         collectionView.frame = view.bounds
     }
 
+}
+
+//MARK: - Api Caller
+extension SearchViewController {
+    private func fetchCategory() {
+        APICaller.shared.getCategories { [weak self] result in
+            switch result {
+            case .success(let model):
+                self?.categories = model
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 //MARK: - Configure Collection View
@@ -69,7 +90,7 @@ extension SearchViewController {
     
     func setupUI() {
         view.addSubview(collectionView)
-        collectionView.register(GenreCollectionViewCell.self, forCellWithReuseIdentifier: GenreCollectionViewCell.identifier)
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         collectionView.backgroundColor = .systemBackground
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -97,14 +118,24 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.identifier, for: indexPath) as? GenreCollectionViewCell else { return UICollectionViewCell() }
-        cell.configure(with: "Genre")
+       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as? CategoryCollectionViewCell else { return UICollectionViewCell() }
+        let categorie = categories[indexPath.row]
+        cell.configure(with: CategoryCollectionViewCellViewModel(
+            title: categorie.name,
+            artWorkURL: URL(string: categorie.icons.first?.url ?? "")))
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let category = categories[indexPath.row]
+        let vc = CategoryViewController(category: category)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }

@@ -16,8 +16,8 @@ class PlaylistViewController: UIViewController {
     //MARK: - Properties
     private lazy var collectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
-            self.configureCollectionView()
+        collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { [weak self] _,_  in
+            self?.configureCollectionView()
         }))
     
     init(playlist: Playlist) {
