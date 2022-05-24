@@ -31,6 +31,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         self.setupUI()
@@ -100,14 +101,28 @@ extension SearchViewController {
 //MARK: - UISearchResultsUpdating
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchResultsVC = searchController.searchResultsController as? SearchResultsViewController,
-              let query = searchController.searchBar.text,
+    }
+}
+
+//MARK: - Searchv
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchController = searchController.searchResultsController as? SearchResultsViewController,
+              let query = searchBar.text,
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        print(query)
-        // here will perform searching
-        // Api Calling 
+        searchController.delegate = self
+        APICaller.shared.search(with: query) { result in
+            switch result {
+            case .success(let results):
+                DispatchQueue.main.async {
+                    searchController.update(with: results)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -138,4 +153,24 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+//MARK: - SearchResultsViewControllerDelegate
+extension SearchViewController: SearchResultsViewControllerDelegate {
+    func searchResultsViewController(_ controller: SearchResultsViewController, didTap result: SearchResult) {
+        switch result {
+        case .artist(let model):
+            break
+        case .album(let model):
+            let vc = AlbumViewController(album: model)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)            
+        case .track(let model):
+            break
+        case .playlist(let model):
+            let vc = PlaylistViewController(playlist: model)
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
