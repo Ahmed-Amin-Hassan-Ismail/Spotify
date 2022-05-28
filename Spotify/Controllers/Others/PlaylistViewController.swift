@@ -12,6 +12,7 @@ class PlaylistViewController: UIViewController {
     //MARK: - Variables
     private var playlist: Playlist
     private var viewModels = [RecommendedTrackCellViewModel]()
+    public var isOwner = false
     
     //MARK: - Properties
     private lazy var collectionView = UICollectionView(
